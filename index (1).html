@@ -1,0 +1,1968 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Boundless Skies — Accessible Wonder for All</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Boundless Skies opens the natural world — from rising constellations to grazing wildlife — to children and adults of every ability." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background: #FBF4E0;
+      color: #0A0E1F;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+    h1, h2, h3 { text-wrap: balance; }
+    p { text-wrap: pretty; }
+    *:focus-visible { outline: 2px solid #E8B86D; outline-offset: 3px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ── Layout helpers ── */
+    .container { max-width: 1280px; margin: 0 auto; }
+    .section-eyebrow {
+      font-family: "Inter", sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 24px 56px;
+    }
+    .nav-links { display: flex; gap: 28px; justify-content: center; }
+    .nav-link {
+      color: #F5EBD3;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      opacity: 0.92;
+      transition: opacity 200ms;
+    }
+    .nav-link:hover { opacity: 1; }
+    .nav-right { display: flex; gap: 24px; align-items: center; justify-self: end; }
+    .nav-cta {
+      background: #E8B86D;
+      color: #0A0E1F;
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 10px 18px;
+      border-radius: 2px;
+      font-weight: 500;
+      transition: background 200ms;
+    }
+    .nav-cta:hover { background: #f0c880; }
+
+    /* ── WORDMARK ── */
+    .wordmark {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      color: #F5EBD3;
+      text-decoration: none;
+    }
+    .wordmark--dark { color: #0A0E1F; }
+    .wordmark img {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 0 1px rgba(245,235,211,0.18);
+    }
+    .wordmark--dark img { box-shadow: 0 0 0 1px rgba(10,14,31,0.12); }
+    .wordmark-text { display: flex; flex-direction: column; line-height: 1; gap: 4px; }
+    .wordmark-name {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 500;
+      font-size: 21px;
+      letter-spacing: 0.02em;
+    }
+    .wordmark-tag {
+      font-family: "Inter", sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #E8B86D;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 940px;
+      overflow: hidden;
+      background: linear-gradient(180deg,
+        #050816 0%, #0a0e1f 12%, #1c1d3d 28%,
+        #4a2244 48%, #8a3a26 64%, #c24b16 78%,
+        #e07a3a 88%, #f3a84e 96%, #ffc683 100%);
+    }
+    .hero-stars {
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 45%;
+      opacity: 0.85;
+      mask-image: linear-gradient(180deg, #000 0%, #000 60%, transparent 100%);
+      -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 60%, transparent 100%);
+    }
+    .hero-stars canvas { width: 100%; height: 100%; display: block; }
+    .hero-sun-halo {
+      position: absolute;
+      bottom: 240px; left: 58%;
+      transform: translateX(-50%);
+      width: 720px; height: 720px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,226,168,0.55) 0%, rgba(255,180,100,0.35) 25%, rgba(243,168,78,0.18) 50%, transparent 70%);
+      pointer-events: none;
+      filter: blur(2px);
+    }
+    .hero-sun {
+      position: absolute;
+      bottom: 230px; left: 58%;
+      transform: translateX(-50%);
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff4d4 0%, #ffd99c 35%, #ffb464 65%, #f3a84e 90%);
+      opacity: 0.98;
+      pointer-events: none;
+      box-shadow: 0 0 120px 40px rgba(255,180,100,0.35);
+    }
+
+    /* Birds */
+    .birds-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .bird {
+      position: absolute;
+      will-change: transform, left;
+    }
+    .bird svg { display: block; }
+    @keyframes bird-cross {
+      0%   { left: -8%; }
+      100% { left: 108%; }
+    }
+    @keyframes bird-flap {
+      0%, 100% { transform: scaleY(1); }
+      50%       { transform: scaleY(0.35); }
+    }
+
+    /* Horizon SVGs */
+    .hero-horizon-svg {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      width: 100%; height: 520px;
+      pointer-events: none;
+    }
+    .hero-wildlife-svg {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      width: 100%; height: 520px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* SVG wildlife animations */
+    @keyframes svg-elephant-walk {
+      0%   { transform: translateX(1700px); }
+      100% { transform: translateX(-200px); }
+    }
+    @keyframes svg-antelope-run {
+      0%   { transform: translateX(-400px); }
+      100% { transform: translateX(1700px); }
+    }
+    @keyframes svg-zebra-drift {
+      0%   { transform: translateX(900px); }
+      100% { transform: translateX(-300px); }
+    }
+    @keyframes svg-giraffe-bob {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-2px); }
+    }
+    .svg-elephant  { animation: svg-elephant-walk 80s linear infinite; }
+    .svg-antelopes { animation: svg-antelope-run 32s linear infinite; }
+    .svg-zebras    { animation: svg-zebra-drift 120s linear infinite; }
+    .svg-giraffe   {
+      animation: svg-giraffe-bob 3.4s ease-in-out infinite;
+      transform-origin: center bottom;
+      transform-box: fill-box;
+    }
+
+    /* Hero content */
+    .hero-content {
+      position: relative;
+      padding: 150px 56px 0;
+      max-width: 1180px;
+      margin: 0 auto;
+      color: #F5EBD3;
+      z-index: 2;
+    }
+    .hero-eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #FFD99C;
+      margin-bottom: 32px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 124px;
+      line-height: 0.96;
+      font-weight: 400;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+    .hero-h1 em { font-style: italic; color: #FFD99C; }
+    .hero-h1 .soft { color: rgba(245,235,211,0.92); }
+    .hero-sub {
+      font-size: 19px;
+      line-height: 1.6;
+      color: rgba(245,235,211,0.9);
+      max-width: 560px;
+      margin-top: 32px;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      margin-top: 40px;
+      align-items: center;
+    }
+    .btn-primary {
+      background: #E8B86D;
+      color: #0A0E1F;
+      padding: 16px 26px;
+      font-size: 14px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 200ms;
+    }
+    .btn-primary:hover { background: #f0c880; }
+    .btn-subtle {
+      color: #F5EBD3;
+      padding: 16px 24px;
+      font-size: 14px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1px solid rgba(245,235,211,0.45);
+      border-radius: 2px;
+      transition: border-color 200ms;
+    }
+    .btn-subtle:hover { border-color: rgba(245,235,211,0.8); }
+    .hero-next {
+      position: absolute;
+      right: 56px;
+      bottom: 56px;
+      background: rgba(10,14,31,0.7);
+      z-index: 3;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 20px 24px;
+      border-radius: 4px;
+      border: 1px solid rgba(245,235,211,0.18);
+      color: #F5EBD3;
+      max-width: 320px;
+    }
+    .hero-next-label {
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #E8B86D;
+      margin-bottom: 6px;
+    }
+    .hero-next-title {
+      font-family: "Cormorant Garamond", serif;
+      font-style: italic;
+      font-size: 22px;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .hero-next-meta { font-size: 13px; color: #C9D1E8; }
+
+    /* ── MISSION / DUAL SECTION ── */
+    .dual-section { padding: 120px 56px; }
+    .section-h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 64px;
+      line-height: 1.08;
+      font-weight: 400;
+      margin: 0;
+      letter-spacing: -0.015em;
+    }
+    .section-h2 em { font-style: italic; color: #C24B16; }
+    .body-text {
+      font-size: 18px;
+      line-height: 1.7;
+      color: #3a3f55;
+      margin: 0;
+    }
+    .body-dark {
+      font-size: 18px;
+      line-height: 1.7;
+      color: #C9D1E8;
+      margin: 0;
+    }
+    .dual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 64px;
+    }
+    .dual-card {
+      background: #F2E5C2;
+      padding: 44px 44px 48px;
+      border-radius: 4px;
+      border: 1px solid rgba(10,14,31,0.08);
+    }
+    .dual-icon { margin-bottom: 20px; }
+    .dual-kicker {
+      font-size: 12px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #C24B16;
+      margin-bottom: 14px;
+    }
+    .dual-h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 38px;
+      line-height: 1.15;
+      font-weight: 400;
+      margin: 0 0 20px;
+      letter-spacing: -0.01em;
+    }
+    .dual-list {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 24px;
+      font-size: 15px;
+      color: #3a3f55;
+      line-height: 1.9;
+    }
+    .link-warm {
+      color: #C24B16;
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border-bottom: 1px solid #C24B16;
+      padding-bottom: 4px;
+      transition: opacity 200ms;
+    }
+    .link-warm:hover { opacity: 0.75; }
+
+    /* ── SAVANNA BAND ── */
+    .savanna-band {
+      position: relative;
+      overflow: hidden;
+    }
+    .savanna-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #f3a84e 0%, #e07a3a 30%, #8a3a26 65%, #2a1530 100%);
+    }
+    .savanna-sun {
+      position: absolute;
+      left: 62%;
+      bottom: 32%;
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffe2a8 0%, #ffb464 60%, transparent 80%);
+      box-shadow: 0 0 80px 20px rgba(255,180,100,0.4);
+    }
+    .savanna-far-layer {
+      position: absolute;
+      inset: 0; width: 100%; height: 100%;
+      opacity: 0.55;
+    }
+    .savanna-ground { position: absolute; left: 0; right: 0; bottom: 0; height: 60%; }
+    .savanna-dirt {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 55%;
+      background: #0A0E1F;
+      clip-path: polygon(0 28%, 8% 22%, 22% 32%, 38% 18%, 55% 28%, 72% 16%, 88% 26%, 100% 20%, 100% 100%, 0 100%);
+    }
+    @keyframes savanna-elephant-walk {
+      0%   { right: -12%; }
+      100% { right: 110%; }
+    }
+    @keyframes savanna-antelope-run {
+      0%   { left: -10%; }
+      100% { left: 110%; }
+    }
+    @keyframes savanna-giraffe-bob {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-3px); }
+    }
+    @keyframes savanna-far-birds {
+      0%   { transform: translateX(-20px); }
+      100% { transform: translateX(20px); }
+    }
+    .savanna-giraffe {
+      position: absolute;
+      left: 22%; bottom: 8%;
+      animation: savanna-giraffe-bob 3.4s ease-in-out infinite;
+    }
+    .savanna-elephant {
+      position: absolute;
+      bottom: 6%; right: -12%;
+      animation: savanna-elephant-walk 48s linear infinite;
+    }
+    .savanna-antelope {
+      position: absolute;
+      bottom: 16%; left: -10%;
+      animation: savanna-antelope-run 22s linear infinite;
+    }
+    .savanna-far-birds {
+      position: absolute;
+      top: 8%; left: 30%;
+      animation: savanna-far-birds 6s ease-in-out infinite alternate;
+      opacity: 0.7;
+    }
+
+    /* ── BAND SECTION (with overlay text) ── */
+    .band-section {
+      position: relative;
+      background: #0A0E1F;
+    }
+    .band-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(90deg, rgba(10,14,31,0.85) 0%, rgba(10,14,31,0.5) 60%, transparent 100%);
+      padding: 0 56px;
+      z-index: 2;
+    }
+    .band-h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 64px;
+      line-height: 1.08;
+      font-weight: 400;
+      margin: 0;
+      letter-spacing: -0.015em;
+      color: #F5EBD3;
+      max-width: 760px;
+    }
+    .band-h2 em { font-style: italic; color: #FFD99C; }
+
+    /* ── PEOPLE / TESTIMONIALS ── */
+    .people-section {
+      padding: 120px 56px;
+      background: #F2E5C2;
+      border-top: 1px solid rgba(10,14,31,0.08);
+      border-bottom: 1px solid rgba(10,14,31,0.08);
+    }
+    .people-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px;
+      margin-top: 36px;
+    }
+    .testimonial { margin: 0; }
+    .img-placeholder {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+    .img-placeholder--light {
+      background: repeating-linear-gradient(135deg, #efe4c8 0 8px, #e6d8b4 8px 16px);
+      border: 1px solid #d6c7a0;
+    }
+    .img-placeholder--dark {
+      background: repeating-linear-gradient(135deg, #1a2240 0 8px, #141b33 8px 16px);
+      border: 1px solid #232c50;
+    }
+    .img-placeholder-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      text-align: center;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .img-placeholder--light .img-placeholder-label { color: #6b5d3a; }
+    .img-placeholder--dark .img-placeholder-label { color: #9BA8C9; }
+    .testimonial-quote {
+      font-family: "Cormorant Garamond", serif;
+      font-style: italic;
+      font-size: 22px;
+      line-height: 1.4;
+      color: #0A0E1F;
+      margin: 20px 0 12px;
+    }
+    .testimonial-who {
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #3a3f55;
+    }
+
+    /* ── CONSTELLATION MAP ── */
+    .dark-section {
+      background: #0A0E1F;
+      padding: 120px 56px;
+      color: #F5EBD3;
+    }
+    .const-head {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 56px;
+      align-items: end;
+      margin-bottom: 36px;
+    }
+    .const-map {
+      position: relative;
+      width: 100%;
+      height: 520px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 30% 40%, #1b2447 0%, #0c1126 60%, #070b1c 100%);
+      border: 1px solid rgba(245,235,211,0.08);
+    }
+    .const-map canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .const-map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .const-story {
+      position: absolute;
+      left: 24px; bottom: 24px; right: 24px;
+      max-width: 640px;
+      padding: 20px 24px;
+      background: rgba(10,14,31,0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 6px;
+      border: 1px solid rgba(245,235,211,0.1);
+      color: #F5EBD3;
+      min-height: 96px;
+      transition: opacity 300ms ease;
+      z-index: 2;
+    }
+    .const-story-hint {
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #9BA8C9;
+      margin-bottom: 8px;
+    }
+    .const-story-text {
+      font-family: "Cormorant Garamond", serif;
+      font-style: italic;
+      font-size: 22px;
+      line-height: 1.4;
+    }
+
+    /* ── EVENTS ── */
+    .events-section { padding: 120px 56px; }
+    .event-card {
+      display: grid;
+      grid-template-columns: 88px 1fr auto;
+      gap: 28px;
+      align-items: start;
+      padding: 28px 0;
+      border-top: 1px solid rgba(10,14,31,0.12);
+    }
+    .event-month {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      color: #E8B86D;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .event-day {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 52px;
+      line-height: 0.95;
+      font-weight: 400;
+    }
+    .event-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 28px;
+      line-height: 1.2;
+      margin: 0;
+      font-weight: 500;
+    }
+    .event-meta { font-size: 15px; opacity: 0.88; margin-top: 6px; }
+    .event-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .event-tag {
+      font-size: 12px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(10,14,31,0.18);
+      opacity: 0.9;
+    }
+    .event-rsvp {
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #E8B86D;
+      text-decoration: none;
+      border-bottom: 1px solid #E8B86D;
+      padding-bottom: 4px;
+      align-self: start;
+      margin-top: 8px;
+      white-space: nowrap;
+    }
+    .events-bottom { border-top: 1px solid rgba(10,14,31,0.12); }
+
+    /* ── HOST ── */
+    .host-section {
+      position: relative;
+      padding: 140px 56px;
+      background: #0A0E1F;
+      color: #F5EBD3;
+      overflow: hidden;
+    }
+    .host-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 80% 20%, #1d2750 0%, #0a0e1f 60%, #050816 100%);
+    }
+    .host-bg canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .host-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .host-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-left: 32px;
+      border-left: 1px solid rgba(245,235,211,0.18);
+    }
+    .host-step {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+    .host-step-n {
+      font-family: "Cormorant Garamond", serif;
+      font-style: italic;
+      font-size: 32px;
+      color: #E8B86D;
+      line-height: 1;
+    }
+    .host-step-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .host-step-body { font-size: 15px; color: #C9D1E8; line-height: 1.55; }
+    .host-h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 64px;
+      line-height: 1.08;
+      font-weight: 400;
+      margin: 0;
+      letter-spacing: -0.015em;
+      color: #F5EBD3;
+    }
+    .host-h2 em { font-style: italic; color: #E8B86D; }
+
+    /* ── GALLERY ── */
+    .gallery-section { padding: 120px 56px; }
+    .gallery-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 36px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: minmax(180px, auto);
+      gap: 12px;
+    }
+    .gallery-grid .span-2-2 { grid-column: span 2; grid-row: span 2; }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      padding: 120px 56px;
+      background: #F2E5C2;
+      border-top: 1px solid rgba(10,14,31,0.08);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contact-right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .contact-label {
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #3a3f55;
+      margin-bottom: 6px;
+    }
+    .contact-value { color: #0A0E1F; font-size: 16px; text-decoration: none; }
+    .newsletter-form {
+      display: flex;
+      gap: 0;
+      align-items: stretch;
+      max-width: 520px;
+      border-bottom: 1px solid rgba(10,14,31,0.4);
+      margin-top: 32px;
+    }
+    .newsletter-form--dark { border-bottom: 1px solid rgba(245,235,211,0.4); }
+    .newsletter-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 14px 0;
+      font-family: "Inter", sans-serif;
+      font-size: 17px;
+      color: #0A0E1F;
+    }
+    .newsletter-input--dark { color: #F5EBD3; }
+    .newsletter-input::placeholder { color: inherit; opacity: 0.5; }
+    .newsletter-btn {
+      background: transparent;
+      border: none;
+      padding: 14px 4px 14px 18px;
+      font-family: "Inter", sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #E8B86D;
+      cursor: pointer;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: #0A0E1F;
+      color: #F5EBD3;
+      padding-top: 0;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 56px 56px 40px;
+      margin-bottom: 40px;
+      border-bottom: 1px solid rgba(245,235,211,0.12);
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .footer-credo {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 22px;
+      color: #E8B86D;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      padding: 0 56px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .footer-col-title {
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #E8B86D;
+      margin-bottom: 16px;
+    }
+    .footer-link {
+      display: block;
+      color: #F5EBD3;
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 10px;
+      opacity: 0.85;
+      transition: opacity 200ms;
+    }
+    .footer-link:hover { opacity: 1; }
+    .footer-bottom {
+      margin-top: 56px;
+      padding: 24px 56px 32px;
+      border-top: 1px solid rgba(245,235,211,0.12);
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #9BA8C9;
+      letter-spacing: 0.06em;
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── Skip link ── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 0;
+      background: #E8B86D;
+      color: #0A0E1F;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      z-index: 9999;
+      border-radius: 0 0 4px 0;
+      transition: top 200ms;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ── Sticky nav ── */
+    .nav--scrolled {
+      position: fixed !important;
+      background: rgba(10,14,31,0.9) !important;
+      backdrop-filter: blur(14px) !important;
+      -webkit-backdrop-filter: blur(14px) !important;
+      border-bottom: 1px solid rgba(245,235,211,0.1);
+    }
+
+    /* ── Hamburger ── */
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      color: #F5EBD3;
+      justify-self: end;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: currentColor;
+      margin: 5px 0;
+      transition: transform 250ms ease, opacity 200ms ease;
+      border-radius: 1px;
+    }
+    header.nav-open .nav-hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    header.nav-open .nav-hamburger span:nth-child(2) { opacity: 0; }
+    header.nav-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── Nav active link ── */
+    .nav-link.is-active { opacity: 1; border-bottom: 1px solid rgba(245,235,211,0.6); }
+
+    /* ── Hero scrim (improves text legibility near bottom of stars) ── */
+    .hero-stars::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0; height: 40%;
+      background: linear-gradient(0deg, rgba(10,14,31,0.3) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    /* ── Scroll-reveal base state ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 100ms; }
+    .reveal-delay-2 { transition-delay: 200ms; }
+    .reveal-delay-3 { transition-delay: 300ms; }
+
+    /* ── Card hover polish ── */
+    .dual-card {
+      transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+    .dual-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(10,14,31,0.12);
+    }
+    .event-card {
+      transition: border-left 150ms ease, padding-left 150ms ease;
+      border-left: 3px solid transparent;
+      padding-left: 0;
+    }
+    .event-card:hover {
+      border-left: 3px solid #C24B16;
+      padding-left: 12px;
+    }
+
+    /* ── Constellation active focus glow ── */
+    g[data-active="true"] { filter: drop-shadow(0 0 8px rgba(232,184,109,0.4)); }
+
+    /* ── Newsletter feedback ── */
+    .newsletter-feedback {
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 1.5;
+      padding: 10px 14px;
+      border-radius: 3px;
+      display: none;
+    }
+    .newsletter-feedback.show { display: block; }
+    .newsletter-feedback.success {
+      background: rgba(194,75,22,0.1);
+      color: #C24B16;
+      border: 1px solid rgba(194,75,22,0.25);
+    }
+    .newsletter-feedback.success.dark {
+      background: rgba(232,184,109,0.12);
+      color: #E8B86D;
+      border: 1px solid rgba(232,184,109,0.3);
+    }
+    .newsletter-feedback.error {
+      background: rgba(200,60,60,0.1);
+      color: #c03c3c;
+      border: 1px solid rgba(200,60,60,0.25);
+    }
+    .newsletter-feedback.error.dark {
+      background: rgba(255,100,100,0.1);
+      color: #ff9090;
+      border: 1px solid rgba(255,100,100,0.25);
+    }
+
+    /* ══════════════════════════════════════════
+       RESPONSIVE BREAKPOINTS
+    ══════════════════════════════════════════ */
+
+    /* ── Tablet ≤ 1024px ── */
+    @media (max-width: 1024px) {
+      .nav { padding: 18px 32px; }
+      .nav-links { display: none; }
+      .hero-h1 { font-size: 80px; }
+      .hero-content { padding: 120px 32px 0; }
+      .hero { height: 780px; }
+      .section-h2 { font-size: 48px; }
+      .band-h2 { font-size: 48px; }
+      .dual-section { padding: 80px 32px; }
+      .dual-grid { grid-template-columns: 1fr; gap: 24px; }
+      .people-section { padding: 80px 32px; }
+      .dark-section { padding: 80px 32px; }
+      .events-section { padding: 80px 32px; }
+      .host-section { padding: 80px 32px; }
+      .host-inner { grid-template-columns: 1fr; gap: 48px; }
+      .host-steps { padding-left: 0; border-left: none; border-top: 1px solid rgba(245,235,211,0.18); padding-top: 32px; }
+      .gallery-section { padding: 80px 32px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-grid .span-2-2 { grid-column: span 2; grid-row: span 1; }
+      .contact-section { padding: 80px 32px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { padding: 40px 32px 32px; }
+      .footer-bottom { padding: 24px 32px 28px; }
+      .const-head { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+    /* ── Mobile ≤ 640px ── */
+    @media (max-width: 640px) {
+      .nav { padding: 16px 20px; grid-template-columns: 1fr auto; }
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        background: rgba(10,14,31,0.97);
+        padding: 80px 24px 32px;
+        z-index: 9;
+        transform: translateX(-100%);
+        transition: transform 300ms ease;
+      }
+      header.nav-open .nav-links {
+        transform: translateX(0);
+      }
+      .nav-links .nav-link {
+        font-size: 22px;
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(245,235,211,0.08);
+        letter-spacing: 0;
+      }
+      .nav-right { display: none; }
+      .nav-hamburger { display: flex; flex-direction: column; z-index: 10; }
+
+      .hero { height: auto; min-height: 100svh; }
+      .hero-h1 { font-size: 52px; }
+      .hero-content { padding: 100px 20px 0; max-width: 100%; }
+      .hero-ctas { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .hero-next { right: 16px; bottom: 16px; max-width: calc(100% - 32px); }
+      .hero-sub { font-size: 17px; }
+
+      .dual-section { padding: 60px 20px; }
+      .dual-card { padding: 32px 28px 36px; }
+      .dual-h3 { font-size: 30px; }
+      .section-h2 { font-size: 38px; }
+      .band-h2 { font-size: 36px; }
+
+      .people-section { padding: 60px 20px; }
+      .people-grid { grid-template-columns: 1fr; }
+
+      .dark-section { padding: 60px 20px; }
+      .const-map { height: 340px; }
+      .const-head { grid-template-columns: 1fr; }
+
+      .events-section { padding: 60px 20px; }
+      .event-card { grid-template-columns: 72px 1fr; gap: 16px; }
+      .event-card .event-rsvp { grid-column: 2; }
+      .event-day { font-size: 40px; }
+
+      .host-section { padding: 60px 20px; }
+      .host-inner { grid-template-columns: 1fr; gap: 36px; }
+      .host-steps { padding-left: 0; border-left: none; border-top: 1px solid rgba(245,235,211,0.18); padding-top: 28px; }
+      .host-h2 { font-size: 38px; }
+
+      .gallery-section { padding: 60px 20px; }
+      .gallery-head { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-grid .span-2-2 { grid-column: span 1; grid-row: span 1; }
+
+      .contact-section { padding: 60px 20px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .contact-right { grid-template-columns: 1fr; gap: 24px; }
+
+      .footer-top { flex-direction: column; gap: 16px; text-align: center; padding: 40px 20px 32px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; padding: 0 20px; gap: 28px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; padding: 20px 20px 28px; }
+    }
+  </style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- NAV -->
+<header>
+  <nav class="nav" aria-label="Main navigation">
+    <a href="#" class="wordmark" aria-label="Boundless Skies home">
+      <img src="logo.png" alt="Boundless Skies logo" />
+      <div class="wordmark-text">
+        <span class="wordmark-name">Boundless Skies</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#mission" class="nav-link">Mission</a>
+      <a href="#wildlife" class="nav-link">Wildlife</a>
+      <a href="#sky" class="nav-link">Sky</a>
+      <a href="#events" class="nav-link">Events</a>
+      <a href="#host" class="nav-link">Host</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a href="#contact" class="nav-link">Donate</a>
+      <a href="#events" class="nav-cta">Find an event</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<main id="main-content">
+
+<!-- HERO -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-stars">
+    <canvas id="hero-starfield"></canvas>
+  </div>
+  <div class="hero-sun-halo" aria-hidden="true"></div>
+  <div class="hero-sun" aria-hidden="true"></div>
+
+  <!-- Birds -->
+  <div class="birds-layer" aria-hidden="true" id="birds-layer"></div>
+
+  <!-- Horizon: ground + acacias -->
+  <svg class="hero-horizon-svg" viewBox="0 0 1600 520" preserveAspectRatio="xMidYEnd slice" aria-hidden="true">
+    <g fill="#0A0E1F">
+      <path d="M 0 80 Q 200 70 420 78 Q 640 86 880 76 Q 1120 68 1340 80 Q 1480 86 1600 78 L 1600 520 L 0 520 Z" />
+    </g>
+    <g fill="#0A0E1F">
+      <!-- Acacias on horizon -->
+      <g transform="translate(90, 80.9)"><rect x="-1.5" y="-36" width="3" height="36"/><ellipse cx="0" cy="-38" rx="28.8" ry="9"/></g>
+      <g transform="translate(240, 79.5)"><rect x="-1.5" y="-28" width="3" height="28"/><ellipse cx="0" cy="-30" rx="22.4" ry="7"/></g>
+      <g transform="translate(380, 81.8)"><rect x="-1.5" y="-44" width="3" height="44"/><ellipse cx="0" cy="-46" rx="35.2" ry="11"/></g>
+      <g transform="translate(560, 80.6)"><rect x="-1.5" y="-32" width="3" height="32"/><ellipse cx="0" cy="-34" rx="25.6" ry="8"/></g>
+      <g transform="translate(720, 79.2)"><rect x="-1.5" y="-26" width="3" height="26"/><ellipse cx="0" cy="-28" rx="20.8" ry="6.5"/></g>
+      <g transform="translate(940, 81.3)"><rect x="-1.5" y="-38" width="3" height="38"/><ellipse cx="0" cy="-40" rx="32" ry="10"/></g>
+      <g transform="translate(1120, 80.1)"><rect x="-1.5" y="-30" width="3" height="30"/><ellipse cx="0" cy="-32" rx="24" ry="7.5"/></g>
+      <g transform="translate(1280, 81.6)"><rect x="-1.5" y="-42" width="3" height="42"/><ellipse cx="0" cy="-44" rx="35.2" ry="11"/></g>
+      <g transform="translate(1460, 79.5)"><rect x="-1.5" y="-28" width="3" height="28"/><ellipse cx="0" cy="-30" rx="22.4" ry="7"/></g>
+      <g transform="translate(1560, 80.4)"><rect x="-1.5" y="-34" width="3" height="34"/><ellipse cx="0" cy="-36" rx="27.2" ry="8.5"/></g>
+    </g>
+    <!-- Foreground big acacia left -->
+    <g fill="#0A0E1F" transform="translate(180, 78)">
+      <rect x="-3" y="-110" width="6" height="110"/>
+      <path d="M 0 -118 Q -40 -126 -68 -132 Q -82 -132 -88 -126 Q -68 -118 -40 -114 Z"/>
+      <path d="M 0 -120 Q 38 -128 70 -134 Q 86 -132 92 -126 Q 70 -118 40 -116 Z"/>
+      <ellipse cx="0" cy="-136" rx="78" ry="18"/>
+      <ellipse cx="-30" cy="-142" rx="34" ry="8"/>
+      <ellipse cx="32" cy="-140" rx="28" ry="7"/>
+    </g>
+    <!-- Grass tufts -->
+    <g stroke="#0A0E1F" stroke-width="1.6" stroke-linecap="round" fill="none">
+      <g transform="translate(40,80)"><path d="M0 0 L-3 -10"/><path d="M0 0 L0 -12"/><path d="M0 0 L3 -10"/></g>
+      <g transform="translate(130,79)"><path d="M0 0 L-3 -10"/><path d="M0 0 L0 -12"/><path d="M0 0 L3 -10"/></g>
+      <g transform="translate(320,80)"><path d="M0 0 L-3 -10"/><path d="M0 0 L0 -12"/><path d="M0 0 L3 -10"/></g>
+      <g transform="translate(500,79)"><path d="M0 0 L-3 -10"/><path d="M0 0 L0 -12"/><path d="M0 0 L3 -10"/></g>
+      <g transform="translate(660,80)"><path d="M0 0 L-3 -10"/><path d="M0 0 L0 -12"/><path d="M0 0 L3 -10"/></g>
+      <g transform="translate(840,79)"><path d="M0 0 L-3 -10"/><path d="M0 0 L0 -12"/><path d="M0 0 L3 -10"/></g>
+      <g transform="translate(1020,80)"><path d="M0 0 L-3 -10"/><path d="M0 0 L0 -12"/><path d="M0 0 L3 -10"/></g>
+      <g transform="translate(1200,79)"><path d="M0 0 L-3 -10"/><path d="M0 0 L0 -12"/><path d="M0 0 L3 -10"/></g>
+      <g transform="translate(1380,80)"><path d="M0 0 L-3 -10"/><path d="M0 0 L0 -12"/><path d="M0 0 L3 -10"/></g>
+      <g transform="translate(1530,79)"><path d="M0 0 L-3 -10"/><path d="M0 0 L0 -12"/><path d="M0 0 L3 -10"/></g>
+    </g>
+  </svg>
+
+  <!-- Wildlife SVG -->
+  <svg class="hero-wildlife-svg" viewBox="0 0 1600 520" preserveAspectRatio="xMidYEnd slice" aria-hidden="true">
+    <!-- Giraffe -->
+    <g class="svg-giraffe" fill="#0A0E1F">
+      <g transform="translate(310, 78)">
+        <rect x="-22" y="-70" width="6" height="70"/>
+        <rect x="-8"  y="-70" width="6" height="70"/>
+        <rect x="22"  y="-70" width="6" height="70"/>
+        <rect x="36"  y="-70" width="6" height="70"/>
+        <rect x="-26" y="-86" width="72" height="20" rx="6"/>
+        <path d="M 32 -86 Q 40 -106 46 -126 L 56 -128 Q 50 -106 42 -82 Z"/>
+        <path d="M 46 -128 Q 64 -134 68 -138 L 70 -132 Q 62 -126 50 -122 Z"/>
+        <rect x="54" y="-142" width="2" height="8"/>
+        <rect x="58" y="-142" width="2" height="8"/>
+      </g>
+    </g>
+    <!-- Elephant -->
+    <g class="svg-elephant" fill="#0A0E1F">
+      <g transform="translate(0, 78)">
+        <ellipse cx="0" cy="-32" rx="62" ry="32"/>
+        <ellipse cx="-52" cy="-32" rx="28" ry="26"/>
+        <path d="M -64 -48 Q -82 -52 -86 -34 Q -78 -20 -62 -24 Z"/>
+        <path d="M -72 -20 Q -86 -4 -90 10 Q -86 14 -78 10 Q -70 -2 -62 -12 Z"/>
+        <rect x="-42" y="-10" width="14" height="10"/>
+        <rect x="-14" y="-6"  width="14" height="6"/>
+        <rect x="20"  y="-10" width="14" height="10"/>
+        <rect x="46"  y="-6"  width="14" height="6"/>
+        <path d="M 62 -34 Q 74 -30 76 -20 L 72 -18 Q 68 -26 60 -28 Z"/>
+      </g>
+    </g>
+    <!-- Antelope herd -->
+    <g class="svg-antelopes" fill="#0A0E1F">
+      <g transform="translate(0, 78)">
+        <ellipse cx="50" cy="-26" rx="20" ry="7"/><path d="M 66 -26 Q 72 -36 76 -40 L 80 -38 Q 76 -32 70 -24 Z"/><path d="M 76 -40 Q 78 -46 80 -48 M 78 -40 Q 82 -44 84 -46" stroke="#0A0E1F" stroke-width="1.2" fill="none"/><path d="M 38 -20 L 34 -2 M 42 -20 L 44 -2" stroke="#0A0E1F" stroke-width="2.5"/><path d="M 58 -20 L 54 -2 M 62 -20 L 66 -2" stroke="#0A0E1F" stroke-width="2.5"/><path d="M 32 -28 L 26 -28 L 32 -24 Z"/>
+      </g>
+      <g transform="translate(90, 79)">
+        <ellipse cx="50" cy="-26" rx="20" ry="7"/><path d="M 66 -26 Q 72 -36 76 -40 L 80 -38 Q 76 -32 70 -24 Z"/><path d="M 38 -20 L 34 -2 M 42 -20 L 44 -2" stroke="#0A0E1F" stroke-width="2.5"/><path d="M 58 -20 L 54 -2 M 62 -20 L 66 -2" stroke="#0A0E1F" stroke-width="2.5"/><path d="M 32 -28 L 26 -28 L 32 -24 Z"/>
+      </g>
+      <g transform="translate(165, 78)">
+        <ellipse cx="50" cy="-26" rx="20" ry="7"/><path d="M 66 -26 Q 72 -36 76 -40 L 80 -38 Q 76 -32 70 -24 Z"/><path d="M 38 -20 L 34 -2 M 42 -20 L 44 -2" stroke="#0A0E1F" stroke-width="2.5"/><path d="M 58 -20 L 54 -2 M 62 -20 L 66 -2" stroke="#0A0E1F" stroke-width="2.5"/><path d="M 32 -28 L 26 -28 L 32 -24 Z"/>
+      </g>
+      <g transform="translate(230, 79)">
+        <ellipse cx="50" cy="-26" rx="20" ry="7"/><path d="M 66 -26 Q 72 -36 76 -40 L 80 -38 Q 76 -32 70 -24 Z"/><path d="M 38 -20 L 34 -2 M 42 -20 L 44 -2" stroke="#0A0E1F" stroke-width="2.5"/><path d="M 58 -20 L 54 -2 M 62 -20 L 66 -2" stroke="#0A0E1F" stroke-width="2.5"/><path d="M 32 -28 L 26 -28 L 32 -24 Z"/>
+      </g>
+      <g transform="translate(310, 78)">
+        <ellipse cx="50" cy="-26" rx="20" ry="7"/><path d="M 66 -26 Q 72 -36 76 -40 L 80 -38 Q 76 -32 70 -24 Z"/><path d="M 38 -20 L 34 -2 M 42 -20 L 44 -2" stroke="#0A0E1F" stroke-width="2.5"/><path d="M 58 -20 L 54 -2 M 62 -20 L 66 -2" stroke="#0A0E1F" stroke-width="2.5"/><path d="M 32 -28 L 26 -28 L 32 -24 Z"/>
+      </g>
+    </g>
+    <!-- Distant zebras -->
+    <g class="svg-zebras" fill="#0A0E1F" opacity="0.85">
+      <g transform="translate(0, 79)"><ellipse cx="0" cy="-8" rx="6" ry="2.5"/><rect x="-5" y="-6" width="1.4" height="6"/><rect x="3.6" y="-6" width="1.4" height="6"/><ellipse cx="6" cy="-11" rx="2.5" ry="2"/></g>
+      <g transform="translate(24, 78)"><ellipse cx="0" cy="-8" rx="6" ry="2.5"/><rect x="-5" y="-6" width="1.4" height="6"/><rect x="3.6" y="-6" width="1.4" height="6"/><ellipse cx="6" cy="-11" rx="2.5" ry="2"/></g>
+      <g transform="translate(50, 79)"><ellipse cx="0" cy="-8" rx="6" ry="2.5"/><rect x="-5" y="-6" width="1.4" height="6"/><rect x="3.6" y="-6" width="1.4" height="6"/><ellipse cx="6" cy="-11" rx="2.5" ry="2"/></g>
+      <g transform="translate(74, 78)"><ellipse cx="0" cy="-8" rx="6" ry="2.5"/><rect x="-5" y="-6" width="1.4" height="6"/><rect x="3.6" y="-6" width="1.4" height="6"/><ellipse cx="6" cy="-11" rx="2.5" ry="2"/></g>
+      <g transform="translate(98, 79)"><ellipse cx="0" cy="-8" rx="6" ry="2.5"/><rect x="-5" y="-6" width="1.4" height="6"/><rect x="3.6" y="-6" width="1.4" height="6"/><ellipse cx="6" cy="-11" rx="2.5" ry="2"/></g>
+      <g transform="translate(124, 78)"><ellipse cx="0" cy="-8" rx="6" ry="2.5"/><rect x="-5" y="-6" width="1.4" height="6"/><rect x="3.6" y="-6" width="1.4" height="6"/><ellipse cx="6" cy="-11" rx="2.5" ry="2"/></g>
+      <g transform="translate(148, 79)"><ellipse cx="0" cy="-8" rx="6" ry="2.5"/><rect x="-5" y="-6" width="1.4" height="6"/><rect x="3.6" y="-6" width="1.4" height="6"/><ellipse cx="6" cy="-11" rx="2.5" ry="2"/></g>
+    </g>
+  </svg>
+
+  <!-- Hero text -->
+  <div class="hero-content">
+    <div class="hero-eyebrow">● An initiative for accessible nature &amp; astronomy</div>
+    <h1 class="hero-h1">
+      <em>Accessible wonder</em><br>
+      <span class="soft">for all.</span>
+    </h1>
+    <p class="hero-sub">
+      Boundless Skies opens the natural world — from rising
+      constellations to grazing wildlife — to children and adults
+      of every ability. We design the equipment, the events, and
+      the experience around the people who join us.
+    </p>
+    <div class="hero-ctas">
+      <a href="#events" class="btn-primary">Find an event near you →</a>
+      <a href="#mission" class="btn-subtle">Read our mission</a>
+    </div>
+  </div>
+
+  <div class="hero-next" aria-label="Next upcoming event">
+    <div class="hero-next-label">Next Event</div>
+    <div class="hero-next-title">Sunset Safari &amp; Spring Stars</div>
+    <div class="hero-next-meta">16 May · 7:00 PM · Cedar Ridge, NC</div>
+  </div>
+</section>
+
+<!-- MISSION / DUAL FOCUS -->
+<section id="mission" class="dual-section">
+  <div class="container">
+    <div class="section-eyebrow" style="color:#C24B16">Our Mission</div>
+    <h2 class="section-h2">Awe lives in two directions — <em>upward and outward.</em></h2>
+    <p class="body-text" style="font-size:19px;max-width:720px;margin-top:20px;">
+      All of us who gaze upon the night sky — or watch a flock turn
+      against the sunset — share a sense of awe and wonder that puts
+      everything else into perspective. It is a powerful feeling, and
+      one that everyone deserves to have.
+    </p>
+    <div class="dual-grid">
+      <!-- Sky column -->
+      <div class="dual-card reveal reveal-delay-1">
+        <div class="dual-icon">
+          <svg viewBox="0 0 60 60" width="48" height="48" aria-hidden="true">
+            <g fill="#C24B16">
+              <circle cx="14" cy="14" r="2"/><circle cx="46" cy="10" r="1.5"/>
+              <circle cx="38" cy="26" r="2.5"/><circle cx="22" cy="34" r="1.5"/>
+              <circle cx="50" cy="40" r="2"/><circle cx="12" cy="48" r="1.8"/>
+              <circle cx="32" cy="50" r="2.2"/>
+            </g>
+            <g stroke="#C24B16" stroke-width="0.8" fill="none" opacity="0.5">
+              <line x1="14" y1="14" x2="38" y2="26"/><line x1="38" y1="26" x2="22" y2="34"/>
+              <line x1="38" y1="26" x2="50" y2="40"/><line x1="22" y1="34" x2="32" y2="50"/>
+            </g>
+          </svg>
+        </div>
+        <div class="dual-kicker">The sky above</div>
+        <h3 class="dual-h3">Astronomy that meets you where you are.</h3>
+        <p class="body-text">
+          Hands-free optics on parallelogram mounts. Carefully positioned
+          tripods and eyepieces. Smart telescopes with high-contrast
+          displays. Sky charts in large print, in braille, and read aloud.
+        </p>
+        <ul class="dual-list">
+          <li>Seated and supine viewing</li>
+          <li>Smart-display scopes for low vision</li>
+          <li>ASL interpretation at every event</li>
+          <li>Sensory-friendly hours and run-of-show</li>
+        </ul>
+        <a href="#sky" class="link-warm">Our astronomy program →</a>
+      </div>
+      <!-- Wildlife column -->
+      <div class="dual-card reveal reveal-delay-2">
+        <div class="dual-icon">
+          <svg viewBox="0 0 60 60" width="48" height="48" aria-hidden="true">
+            <g fill="#C24B16">
+              <rect x="38" y="22" width="3" height="26"/>
+              <rect x="34" y="40" width="3" height="14"/><rect x="42" y="40" width="3" height="14"/>
+              <rect x="46" y="40" width="3" height="14"/><rect x="30" y="40" width="3" height="14"/>
+            </g>
+            <path d="M 6 18 Q 12 12 18 18 Q 24 12 30 18" stroke="#C24B16" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="dual-kicker">The earth around</div>
+        <h3 class="dual-h3">Wildlife and wild places, for every body.</h3>
+        <p class="body-text">
+          Birding from raised platforms. Tactile field guides for the
+          blind. Quiet observation blinds for autistic guests. Trail
+          programs designed alongside the people who use them — so the
+          more-than-human world is a place anyone can spend an evening.
+        </p>
+        <ul class="dual-list">
+          <li>Accessible birding hides &amp; raised hides</li>
+          <li>Tactile and audio field guides</li>
+          <li>Sensory rest spaces on every walk</li>
+          <li>Partnerships with sanctuaries &amp; reserves</li>
+        </ul>
+        <a href="#wildlife" class="link-warm">Our nature program →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WILDLIFE BAND (section break) -->
+<section id="wildlife" class="band-section" aria-label="Wildlife band">
+  <div class="savanna-band" style="height:260px">
+    <div class="savanna-bg"></div>
+    <div class="savanna-far-layer">
+      <svg viewBox="0 0 1600 260" preserveAspectRatio="xMidYEnd slice" style="width:100%;height:100%" aria-hidden="true">
+        <g fill="#3a1a2c">
+          <path d="M 0 210 Q 200 180 400 195 T 800 190 T 1200 200 T 1600 188 L 1600 260 L 0 260 Z"/>
+          <g><g transform="translate(120,192)"><rect x="-1" y="0" width="2" height="14"/><ellipse cx="0" cy="-2" rx="10" ry="4"/></g></g>
+          <g><g transform="translate(280,192)"><rect x="-1" y="0" width="2" height="14"/><ellipse cx="0" cy="-2" rx="10" ry="4"/></g></g>
+          <g><g transform="translate(510,192)"><rect x="-1" y="0" width="2" height="14"/><ellipse cx="0" cy="-2" rx="10" ry="4"/></g></g>
+          <g><g transform="translate(720,192)"><rect x="-1" y="0" width="2" height="14"/><ellipse cx="0" cy="-2" rx="10" ry="4"/></g></g>
+          <g><g transform="translate(940,192)"><rect x="-1" y="0" width="2" height="14"/><ellipse cx="0" cy="-2" rx="10" ry="4"/></g></g>
+          <g><g transform="translate(1180,192)"><rect x="-1" y="0" width="2" height="14"/><ellipse cx="0" cy="-2" rx="10" ry="4"/></g></g>
+          <g><g transform="translate(1380,192)"><rect x="-1" y="0" width="2" height="14"/><ellipse cx="0" cy="-2" rx="10" ry="4"/></g></g>
+          <g><g transform="translate(1520,192)"><rect x="-1" y="0" width="2" height="14"/><ellipse cx="0" cy="-2" rx="10" ry="4"/></g></g>
+        </g>
+      </svg>
+    </div>
+    <div class="savanna-ground">
+      <div class="savanna-dirt"></div>
+      <!-- Foreground acacia -->
+      <svg viewBox="0 0 240 200" style="position:absolute;left:3%;bottom:0;width:220px;height:180px" aria-hidden="true">
+        <g fill="#0A0E1F">
+          <rect x="115" y="80" width="6" height="120"/>
+          <path d="M 118 92 Q 100 84 88 78 Q 78 76 72 80 Q 86 88 102 90 Z"/>
+          <path d="M 118 88 Q 134 80 152 76 Q 162 76 168 80 Q 152 86 134 88 Z"/>
+          <ellipse cx="120" cy="74" rx="60" ry="14"/>
+          <ellipse cx="100" cy="68" rx="28" ry="6"/>
+          <ellipse cx="146" cy="70" rx="22" ry="5"/>
+        </g>
+      </svg>
+      <!-- Giraffe -->
+      <div class="savanna-giraffe" aria-hidden="true">
+        <svg viewBox="0 0 120 160" width="110" height="146">
+          <g fill="#0A0E1F">
+            <rect x="22" y="80" width="6" height="70"/><rect x="36" y="80" width="6" height="70"/>
+            <rect x="68" y="80" width="6" height="70"/><rect x="82" y="80" width="6" height="70"/>
+            <rect x="18" y="68" width="76" height="20" rx="6"/>
+            <path d="M 78 68 Q 86 50 92 30 L 102 28 Q 96 50 88 72 Z"/>
+            <path d="M 92 28 Q 110 22 114 18 L 116 24 Q 108 30 96 34 Z"/>
+            <rect x="100" y="14" width="2" height="8"/><rect x="104" y="14" width="2" height="8"/>
+            <path d="M 18 70 L 12 78 L 14 80 L 20 76 Z"/>
+          </g>
+        </svg>
+      </div>
+      <!-- Elephant -->
+      <div class="savanna-elephant" aria-hidden="true">
+        <svg viewBox="0 0 200 120" width="170" height="102">
+          <g fill="#0A0E1F">
+            <ellipse cx="100" cy="58" rx="62" ry="32"/>
+            <ellipse cx="48" cy="58" rx="28" ry="26"/>
+            <path d="M 36 42 Q 18 38 14 56 Q 22 70 38 66 Z"/>
+            <path d="M 28 70 Q 14 86 10 100 Q 14 104 22 100 Q 30 88 38 78 Z"/>
+            <path d="M 36 78 Q 30 86 28 92 L 32 92 Q 36 84 40 80 Z" fill="#F5EBD3"/>
+            <rect x="58" y="80" width="14" height="30"/><rect x="86" y="84" width="14" height="28"/>
+            <rect x="120" y="80" width="14" height="30"/><rect x="146" y="84" width="14" height="28"/>
+            <path d="M 162 56 Q 174 60 176 70 L 172 72 Q 168 64 160 62 Z"/>
+          </g>
+        </svg>
+      </div>
+      <!-- Antelope -->
+      <div class="savanna-antelope" aria-hidden="true">
+        <svg viewBox="0 0 100 70" width="80" height="56">
+          <g fill="#0A0E1F">
+            <ellipse cx="50" cy="34" rx="28" ry="10"/>
+            <path d="M 72 34 Q 80 20 86 14 L 92 16 Q 88 26 80 36 Z"/>
+            <path d="M 84 14 Q 88 6 92 2 M 88 14 Q 94 8 98 4" stroke="#0A0E1F" stroke-width="1.5" fill="none"/>
+            <path d="M 32 42 L 26 64 M 36 42 L 38 64" stroke="#0A0E1F" stroke-width="3"/>
+            <path d="M 62 42 L 56 64 M 66 42 L 70 64" stroke="#0A0E1F" stroke-width="3"/>
+            <path d="M 22 32 L 14 30 L 22 36 Z"/>
+          </g>
+        </svg>
+      </div>
+      <!-- Far birds -->
+      <div class="savanna-far-birds" aria-hidden="true">
+        <svg viewBox="0 0 200 30" width="160" height="22">
+          <g fill="none" stroke="#0A0E1F" stroke-width="1.5" stroke-linecap="round">
+            <path d="M 4 14 Q 10 8 16 14 Q 22 8 28 14"/>
+            <path d="M 50 10 Q 56 4 62 10 Q 68 4 74 10"/>
+            <path d="M 110 16 Q 116 10 122 16 Q 128 10 134 16"/>
+            <path d="M 160 12 Q 166 6 172 12 Q 178 6 184 12"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="band-overlay">
+    <div class="container">
+      <div class="section-eyebrow" style="color:#FFD99C">In the field</div>
+      <h2 class="band-h2">
+        From a heron at dusk to <em>Saturn at midnight</em> — one continuous evening of wonder.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="people-section">
+  <div class="container">
+    <div class="section-eyebrow" style="color:#C24B16">In their words</div>
+    <div class="people-grid">
+      <figure class="testimonial reveal reveal-delay-1">
+        <div class="img-placeholder img-placeholder--light" style="aspect-ratio:4/5">
+          <div class="img-placeholder-label">Portrait — parent and child outside, dusk</div>
+        </div>
+        <blockquote class="testimonial-quote">"The first time my son saw Saturn through their scope — without me lifting him — he said he could be an astronaut. He's seven."</blockquote>
+        <figcaption class="testimonial-who">— Marina K., parent</figcaption>
+      </figure>
+      <figure class="testimonial reveal reveal-delay-2">
+        <div class="img-placeholder img-placeholder--light" style="aspect-ratio:4/5">
+          <div class="img-placeholder-label">Portrait — guest at parallelogram mount</div>
+        </div>
+        <blockquote class="testimonial-quote">"I'd given up on telescopes years ago. Their parallelogram mount let me look at the moon from my chair, and I cried."</blockquote>
+        <figcaption class="testimonial-who">— James A., guest</figcaption>
+      </figure>
+      <figure class="testimonial reveal reveal-delay-3">
+        <div class="img-placeholder img-placeholder--light" style="aspect-ratio:4/5">
+          <div class="img-placeholder-label">Portrait — educator with student, raised birding hide</div>
+        </div>
+        <blockquote class="testimonial-quote">"On the bird walk they had a tactile field guide. My daughter is blind and she felt the shape of a kingfisher's beak. She hasn't stopped talking about it."</blockquote>
+        <figcaption class="testimonial-who">— Dr. Patel, Cedar Ridge School</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- CONSTELLATION MAP -->
+<section id="sky" class="dark-section">
+  <div class="container">
+    <div class="const-head">
+      <div>
+        <div class="section-eyebrow" style="color:#E8B86D">Who we observe with</div>
+        <h2 class="section-h2" style="color:#F5EBD3">Each pattern is <em style="color:#E8B86D">someone we share the sky with.</em></h2>
+      </div>
+      <p class="body-dark">
+        Hover the constellations. The design of every event we run —
+        under the stars or in the sanctuary — begins with the people in it.
+      </p>
+    </div>
+    <div class="const-map" role="img" aria-label="Interactive constellation map">
+      <canvas id="const-starfield"></canvas>
+      <svg id="const-svg" viewBox="0 0 1280 520" preserveAspectRatio="xMidYMid slice"></svg>
+      <div class="const-story" aria-live="polite">
+        <div class="const-story-hint" id="const-hint">Hover a constellation</div>
+        <div class="const-story-text" id="const-text">Each constellation here stands for someone we observe with — a child, a parent, a student, a neighbor.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events" class="events-section">
+  <div class="container">
+    <div class="section-eyebrow" style="color:#C24B16">Upcoming events</div>
+    <h2 class="section-h2">Come look up — and out — with us.</h2>
+    <p class="body-text" style="margin-top:16px;max-width:560px;">
+      All Boundless Skies events are free and open to anyone.
+      Each is built with adaptive equipment and patient guides,
+      and most pair an astronomy session with a wildlife walk.
+    </p>
+    <div style="margin-top:32px">
+      <article class="event-card reveal">
+        <div><div class="event-month">May</div><div class="event-day">16</div></div>
+        <div>
+          <h3 class="event-title">Spring Stars at Cedar Ridge School</h3>
+          <div class="event-meta">Cedar Ridge Residential School · Asheville, NC · 8:30 – 10:30 PM</div>
+          <div class="event-tags">
+            <span class="event-tag">Hands-free optics</span>
+            <span class="event-tag">Quiet hour</span>
+            <span class="event-tag">Wheelchair accessible</span>
+          </div>
+        </div>
+        <a href="#" class="event-rsvp">RSVP →</a>
+      </article>
+      <article class="event-card reveal">
+        <div><div class="event-month">Jun</div><div class="event-day">07</div></div>
+        <div>
+          <h3 class="event-title">Saturn &amp; The Summer Triangle</h3>
+          <div class="event-meta">Greene Memorial Library lawn · Roanoke, VA · 9:00 – 11:00 PM</div>
+          <div class="event-tags">
+            <span class="event-tag">Smart-display scopes</span>
+            <span class="event-tag">ASL interpreter</span>
+          </div>
+        </div>
+        <a href="#" class="event-rsvp">RSVP →</a>
+      </article>
+      <article class="event-card reveal">
+        <div><div class="event-month">Jun</div><div class="event-day">21</div></div>
+        <div>
+          <h3 class="event-title">Solstice Sunset &amp; Moon Walk</h3>
+          <div class="event-meta">Holly House Adult Care · Lynchburg, VA · 7:00 – 9:30 PM</div>
+          <div class="event-tags">
+            <span class="event-tag">Seated viewing</span>
+            <span class="event-tag">Large-print guides</span>
+          </div>
+        </div>
+        <a href="#" class="event-rsvp">RSVP →</a>
+      </article>
+      <article class="event-card reveal">
+        <div><div class="event-month">Jul</div><div class="event-day">12</div></div>
+        <div>
+          <h3 class="event-title">Family Night Under the Milky Way</h3>
+          <div class="event-meta">Pisgah State Park · Brevard, NC · 9:00 PM – Midnight</div>
+          <div class="event-tags">
+            <span class="event-tag">Family</span>
+            <span class="event-tag">Sensory-friendly tent</span>
+            <span class="event-tag">Parallelogram mount</span>
+          </div>
+        </div>
+        <a href="#" class="event-rsvp">RSVP →</a>
+      </article>
+      <div class="events-bottom"></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOST -->
+<section id="host" class="host-section">
+  <div class="host-bg">
+    <canvas id="host-starfield"></canvas>
+  </div>
+  <div class="container">
+    <div class="host-inner">
+      <div>
+        <div class="section-eyebrow" style="color:#E8B86D">Host an event</div>
+        <h2 class="host-h2">Schools, residences, sanctuaries — <em>we'll bring the wild &amp; the sky to you.</em></h2>
+        <p class="body-dark" style="max-width:580px;margin-top:24px;">
+          Our team handles the equipment, training for staff, and a
+          full accessibility assessment of your site. There is no
+          cost to the host. We work in evenings, in weather, with
+          groups large and small.
+        </p>
+      </div>
+      <div class="host-steps">
+        <div class="host-step reveal">
+          <div class="host-step-n">1</div>
+          <div>
+            <div class="host-step-title">Tell us about your site</div>
+            <div class="host-step-body">Indoor and outdoor space, lighting, who you serve.</div>
+          </div>
+        </div>
+        <div class="host-step reveal">
+          <div class="host-step-n">2</div>
+          <div>
+            <div class="host-step-title">We assess and plan</div>
+            <div class="host-step-body">Equipment selection, staff training, run-of-show.</div>
+          </div>
+        </div>
+        <div class="host-step reveal">
+          <div class="host-step-n">3</div>
+          <div>
+            <div class="host-step-title">Together, we look up</div>
+            <div class="host-step-body">Two to three hours, with structure and quiet built in.</div>
+          </div>
+        </div>
+        <a href="#contact" class="btn-primary" style="margin-top:16px;display:inline-block">Request a visit →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="gallery-section">
+  <div class="container">
+    <div class="gallery-head">
+      <div>
+        <div class="section-eyebrow" style="color:#C24B16">From the field</div>
+        <h2 class="section-h2">Faces, fur, feathers, and the sky above.</h2>
+      </div>
+      <a href="#" class="link-warm">See the full archive →</a>
+    </div>
+    <div class="gallery-grid">
+      <div class="img-placeholder img-placeholder--light span-2-2" style="aspect-ratio:4/3">
+        <div class="img-placeholder-label">Star party at residential school, golden hour</div>
+      </div>
+      <div class="img-placeholder img-placeholder--light" style="aspect-ratio:1/1">
+        <div class="img-placeholder-label">Saturn through a smart telescope display</div>
+      </div>
+      <div class="img-placeholder img-placeholder--light" style="aspect-ratio:1/1">
+        <div class="img-placeholder-label">Tactile field guide — kingfisher bill</div>
+      </div>
+      <div class="img-placeholder img-placeholder--light" style="aspect-ratio:1/1">
+        <div class="img-placeholder-label">Heron at dusk, raised viewing hide</div>
+      </div>
+      <div class="img-placeholder img-placeholder--light" style="aspect-ratio:1/1">
+        <div class="img-placeholder-label">Wheelchair user reaching the eyepiece</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <div class="section-eyebrow" style="color:#C24B16">Stay in touch</div>
+        <h2 class="section-h2">A monthly note from <em>under the stars and out in the field.</em></h2>
+        <p class="body-text" style="max-width:460px;margin-top:16px;">
+          What's worth looking at this month, where we'll be, and
+          what we're learning from the people we observe with.
+        </p>
+        <form class="newsletter-form" data-newsletter aria-label="Newsletter signup">
+          <input type="email" placeholder="your@email.com" aria-label="Email address" class="newsletter-input" autocomplete="email" required />
+          <button type="submit" class="newsletter-btn" aria-label="Subscribe to newsletter">Subscribe →</button>
+        </form>
+        <div class="newsletter-feedback" role="alert" aria-live="polite"></div>
+      </div>
+      <div class="contact-right">
+        <div>
+          <div class="contact-label">Email</div>
+          <a href="mailto:hello@boundlessskies.org" class="contact-value">hello@boundlessskies.org</a>
+        </div>
+        <div>
+          <div class="contact-label">Phone</div>
+          <a href="tel:+18285550142" class="contact-value">+1 (828) 555-0142</a>
+        </div>
+        <div>
+          <div class="contact-label">Mail</div>
+          <div class="contact-value">P.O. Box 412, Asheville, NC 28801</div>
+        </div>
+        <div>
+          <div class="contact-label">Press &amp; partnerships</div>
+          <a href="mailto:press@boundlessskies.org" class="contact-value">press@boundlessskies.org</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <!-- Savanna band above footer -->
+  <div class="savanna-band" style="height:180px" aria-hidden="true">
+    <div class="savanna-bg"></div>
+    <div class="savanna-ground">
+      <div class="savanna-dirt"></div>
+    </div>
+  </div>
+  <div class="footer-top">
+    <a href="#" class="wordmark wordmark--dark" style="color:#F5EBD3" aria-label="Boundless Skies home">
+      <img src="logo.png" alt="Boundless Skies logo" style="box-shadow:0 0 0 1px rgba(245,235,211,0.18)" />
+      <div class="wordmark-text">
+        <span class="wordmark-name">Boundless Skies</span>
+        <span class="wordmark-tag">For All</span>
+      </div>
+    </a>
+    <p class="footer-credo"><em>Accessible wonder, for all — above and below.</em></p>
+  </div>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-col-title">About</div>
+      <a href="#mission" class="footer-link">Mission</a>
+      <a href="#" class="footer-link">Team</a>
+      <a href="#" class="footer-link">Press</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Get involved</div>
+      <a href="#events" class="footer-link">Attend an event</a>
+      <a href="#host" class="footer-link">Host at your site</a>
+      <a href="#" class="footer-link">Volunteer</a>
+      <a href="#contact" class="footer-link">Donate</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Resources</div>
+      <a href="#" class="footer-link">Accessibility statement</a>
+      <a href="#" class="footer-link">Equipment guides</a>
+      <a href="#" class="footer-link">Hosting checklist</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Newsletter</div>
+      <form class="newsletter-form newsletter-form--dark" data-newsletter data-dark aria-label="Footer newsletter">
+        <input type="email" placeholder="your@email.com" aria-label="Email address" class="newsletter-input newsletter-input--dark" autocomplete="email" required />
+        <button type="submit" class="newsletter-btn" aria-label="Subscribe to newsletter">Subscribe →</button>
+      </form>
+      <div class="newsletter-feedback" role="alert" aria-live="polite"></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Boundless Skies · A 501(c)(3) initiative</span>
+    <span>All adaptations open and shared.</span>
+  </div>
+</footer>
+
+<script>
+// ── Starfield canvas ─────────────────────────────────────────────────
+function initStarfield(canvas, opts) {
+  if (!canvas) return;
+  const density = opts.density || 1;
+  const intensity = opts.intensity || 1;
+  const ctx = canvas.getContext('2d');
+  let raf, w, h, stars;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function resize() {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    const r = canvas.getBoundingClientRect();
+    w = canvas.width = r.width * dpr;
+    h = canvas.height = r.height * dpr;
+    canvas.style.width = r.width + 'px';
+    canvas.style.height = r.height + 'px';
+    const count = Math.floor((r.width * r.height) / 2400 * density);
+    stars = Array.from({ length: count }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      r: (Math.random() * 1.4 + 0.2) * dpr,
+      a: Math.random() * 0.7 + 0.2,
+      tw: Math.random() * 0.02 + 0.005,
+      ph: Math.random() * Math.PI * 2,
+      vx: (Math.random() - 0.5) * 0.04 * dpr,
+      vy: (Math.random() - 0.5) * 0.04 * dpr,
+    }));
+  }
+
+  function draw(t) {
+    ctx.clearRect(0, 0, w, h);
+    for (const s of stars) {
+      const tw = reduce ? s.a : s.a + Math.sin(t * s.tw + s.ph) * 0.3;
+      ctx.beginPath();
+      ctx.fillStyle = `hsla(220, 30%, ${88 + Math.random() * 4}%, ${Math.max(0, tw) * intensity})`;
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fill();
+      if (!reduce) {
+        s.x += s.vx; s.y += s.vy;
+        if (s.x < 0) s.x = w; if (s.x > w) s.x = 0;
+        if (s.y < 0) s.y = h; if (s.y > h) s.y = 0;
+      }
+    }
+    raf = requestAnimationFrame(draw);
+  }
+
+  resize();
+  draw(0);
+  const ro = new ResizeObserver(resize);
+  ro.observe(canvas);
+  return () => { cancelAnimationFrame(raf); ro.disconnect(); };
+}
+
+initStarfield(document.getElementById('hero-starfield'), { density: 0.9, intensity: 0.85 });
+initStarfield(document.getElementById('const-starfield'), { density: 1.4, intensity: 0.9 });
+initStarfield(document.getElementById('host-starfield'), { density: 0.7, intensity: 0.7 });
+
+// ── Birds ─────────────────────────────────────────────────────────────
+const flock = [
+  { delay: 0,  dur: 38, top: '22%', scale: 1.0,  flap: 0.7 },
+  { delay: 4,  dur: 44, top: '28%', scale: 0.85, flap: 0.9 },
+  { delay: 9,  dur: 36, top: '18%', scale: 0.7,  flap: 1.1 },
+  { delay: 14, dur: 50, top: '34%', scale: 1.15, flap: 0.6 },
+  { delay: 18, dur: 42, top: '24%', scale: 0.6,  flap: 1.3 },
+  { delay: 23, dur: 48, top: '30%', scale: 0.9,  flap: 0.8 },
+  { delay: 28, dur: 40, top: '20%', scale: 0.55, flap: 1.4 },
+];
+const birdsLayer = document.getElementById('birds-layer');
+flock.forEach(b => {
+  const div = document.createElement('div');
+  div.className = 'bird';
+  div.style.cssText = `top:${b.top};transform:scale(${b.scale});animation:bird-cross ${b.dur}s linear ${b.delay}s infinite`;
+  div.innerHTML = `<svg width="56" height="22" viewBox="0 0 56 22" style="animation:bird-flap ${b.flap}s ease-in-out infinite;transform-origin:center"><path d="M 2 14 Q 10 4 18 12 Q 24 6 28 10 Q 32 6 38 12 Q 46 4 54 14" fill="none" stroke="#0A0E1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  birdsLayer.appendChild(div);
+});
+
+// ── Sticky nav ────────────────────────────────────────────────────────
+const nav = document.querySelector('.nav');
+const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+const sections = document.querySelectorAll('main section[id]');
+
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('nav--scrolled', window.scrollY > 80);
+  // Active link highlighting
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle('is-active', link.getAttribute('href') === '#' + current);
+  });
+}, { passive: true });
+
+// ── Hamburger nav ─────────────────────────────────────────────────────
+const header = document.querySelector('header');
+const hamburger = document.querySelector('.nav-hamburger');
+hamburger.addEventListener('click', () => {
+  const open = header.classList.toggle('nav-open');
+  hamburger.setAttribute('aria-expanded', String(open));
+  hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+});
+// Close on nav link click
+document.querySelectorAll('.nav-links .nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    header.classList.remove('nav-open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.setAttribute('aria-label', 'Open menu');
+  });
+});
+// Close on outside click
+document.addEventListener('click', e => {
+  if (header.classList.contains('nav-open') && !header.contains(e.target)) {
+    header.classList.remove('nav-open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.setAttribute('aria-label', 'Open menu');
+  }
+});
+
+// ── Scroll-reveal ─────────────────────────────────────────────────────
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!reduceMotion) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('revealed');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+} else {
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('revealed'));
+}
+
+// ── Constellation map ─────────────────────────────────────────────────
+const CONSTELLATIONS = [
+  {
+    id: 'ursa', name: 'Ursa Major',
+    story: 'For the family attending their first event — the easiest path into the sky.',
+    points: [[80,220],[140,200],[200,215],[255,230],[305,195],[355,175],[330,130]],
+    lines: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[4,3]],
+  },
+  {
+    id: 'cassiopeia', name: 'Cassiopeia',
+    story: 'For the wheelchair user reaching the eyepiece without bending — hands-free optics on a parallelogram mount.',
+    points: [[470,110],[535,140],[600,100],[665,145],[725,115]],
+    lines: [[0,1],[1,2],[2,3],[3,4]],
+  },
+  {
+    id: 'orion', name: 'Orion',
+    story: 'For the student at the residential school — smart telescopes with high-contrast displays they can read.',
+    points: [[860,280],[905,230],[950,195],[930,320],[905,360],[880,400],[990,290],[1020,350]],
+    lines: [[0,1],[1,2],[3,4],[4,5],[1,3],[1,6],[6,7]],
+  },
+  {
+    id: 'lyra', name: 'Lyra',
+    story: 'For the autistic child who needs quiet — sessions in low-stimulation, predictable settings.',
+    points: [[1110,150],[1160,180],[1200,140],[1175,95],[1130,105]],
+    lines: [[0,1],[1,2],[2,3],[3,4],[4,0]],
+  },
+];
+
+const constSvg = document.getElementById('const-svg');
+const hint = document.getElementById('const-hint');
+const storyText = document.getElementById('const-text');
+const NS = 'http://www.w3.org/2000/svg';
+const isTouch = matchMedia('(hover: none)').matches;
+if (isTouch) hint.textContent = 'Tap a constellation';
+
+function mkEl(tag, attrs) {
+  const el = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+  return el;
+}
+
+CONSTELLATIONS.forEach(c => {
+  const g = mkEl('g', { tabindex: '0', role: 'button', 'aria-label': c.name, style: 'cursor:pointer;outline:none' });
+
+  const poly = mkEl('polygon', { points: c.points.map(p => p.join(',')).join(' '), fill: 'rgba(0,0,0,0.001)' });
+  g.appendChild(poly);
+
+  c.lines.forEach(([a, b]) => {
+    const [x1,y1] = c.points[a], [x2,y2] = c.points[b];
+    const line = mkEl('line', { x1, y1, x2, y2, stroke: '#E8B86D', 'stroke-width': '0.6', 'stroke-opacity': '0',
+      style: 'transition:stroke-opacity 600ms ease, stroke-width 400ms ease' });
+    line.dataset.line = '1';
+    g.appendChild(line);
+  });
+
+  c.points.forEach(([x, y]) => {
+    const halo = mkEl('circle', { cx: x, cy: y, r: '8', fill: '#E8B86D', opacity: '0.08',
+      style: 'transition:all 400ms ease' });
+    halo.dataset.halo = '1';
+    const dot = mkEl('circle', { cx: x, cy: y, r: '1.8', fill: '#F5EBD3',
+      style: 'transition:all 400ms ease' });
+    dot.dataset.dot = '1';
+    g.appendChild(halo);
+    g.appendChild(dot);
+  });
+
+  const label = mkEl('text', { x: c.points[0][0], y: c.points[0][1] - 26, fill: '#F5EBD3',
+    style: 'font-family:"Cormorant Garamond",serif;font-style:italic;font-size:22px;opacity:0;transition:opacity 400ms ease' });
+  label.textContent = c.name;
+  g.appendChild(label);
+
+  let touchTimer = null;
+
+  function activate() {
+    g.querySelectorAll('[data-line]').forEach(l => { l.setAttribute('stroke-opacity','0.9'); l.setAttribute('stroke-width','1.2'); });
+    g.querySelectorAll('[data-halo]').forEach(h => { h.setAttribute('r','14'); h.setAttribute('opacity','0.18'); });
+    g.querySelectorAll('[data-dot]').forEach(d => d.setAttribute('r','2.6'));
+    label.style.opacity = '1';
+    g.setAttribute('data-active', 'true');
+    hint.textContent = 'From the sky';
+    storyText.textContent = c.story;
+  }
+
+  function deactivate() {
+    g.querySelectorAll('[data-line]').forEach(l => { l.setAttribute('stroke-opacity','0'); l.setAttribute('stroke-width','0.6'); });
+    g.querySelectorAll('[data-halo]').forEach(h => { h.setAttribute('r','8'); h.setAttribute('opacity','0.08'); });
+    g.querySelectorAll('[data-dot]').forEach(d => d.setAttribute('r','1.8'));
+    label.style.opacity = '0';
+    g.removeAttribute('data-active');
+    hint.textContent = isTouch ? 'Tap a constellation' : 'Hover a constellation';
+    storyText.textContent = 'Each constellation here stands for someone we observe with — a child, a parent, a student, a neighbor.';
+  }
+
+  g.addEventListener('mouseenter', activate);
+  g.addEventListener('mouseleave', deactivate);
+  g.addEventListener('focus', activate);
+  g.addEventListener('blur', deactivate);
+  g.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    activate();
+    clearTimeout(touchTimer);
+    touchTimer = setTimeout(deactivate, 2200);
+  }, { passive: false });
+
+  constSvg.appendChild(g);
+});
+
+// ── Newsletter forms ──────────────────────────────────────────────────
+document.querySelectorAll('[data-newsletter]').forEach(form => {
+  const isDark = form.hasAttribute('data-dark');
+  const feedback = form.nextElementSibling;
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const input = form.querySelector('input[type="email"]');
+    const val = input.value.trim();
+
+    feedback.className = 'newsletter-feedback';
+    if (!val || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+      feedback.textContent = 'Please enter a valid email address.';
+      feedback.classList.add('show', 'error', isDark ? 'dark' : '');
+      input.focus();
+      return;
+    }
+
+    feedback.textContent = 'Thanks — you\'re on the list! We\'ll be in touch.';
+    feedback.classList.add('show', 'success', isDark ? 'dark' : '');
+    input.value = '';
+    form.querySelector('button').disabled = true;
+    setTimeout(() => { form.querySelector('button').disabled = false; }, 4000);
+  });
+});
+</script>
+</body>
+</html>
