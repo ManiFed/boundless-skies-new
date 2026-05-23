@@ -128,7 +128,7 @@
     .hero-stars canvas { width: 100%; height: 100%; display: block; }
     .hero-sun-halo {
       position: absolute;
-      bottom: 240px; left: 58%;
+      bottom: -10px; left: 58%;
       transform: translateX(-50%);
       width: 720px; height: 720px;
       border-radius: 50%;
@@ -201,10 +201,15 @@
       0%, 100% { transform: translateY(0); }
       50%       { transform: translateY(-2px); }
     }
-    .svg-elephant  { animation: svg-elephant-walk 80s linear infinite; }
-    .svg-antelopes { animation: svg-antelope-run 32s linear infinite; }
-    .svg-zebras    { animation: svg-zebra-drift 120s linear infinite; }
-    .svg-giraffe   {
+    @keyframes svg-giraffe-walk {
+      0%   { transform: translateX(1400px); }
+      100% { transform: translateX(-300px); }
+    }
+    .svg-elephant     { animation: svg-elephant-walk 80s linear infinite; }
+    .svg-antelopes    { animation: svg-antelope-run 32s linear infinite; }
+    .svg-zebras       { animation: svg-zebra-drift 120s linear infinite; }
+    .svg-giraffe-walk { animation: svg-giraffe-walk 100s linear infinite; }
+    .svg-giraffe-bob  {
       animation: svg-giraffe-bob 3.4s ease-in-out infinite;
       transform-origin: center bottom;
       transform-box: fill-box;
@@ -1272,61 +1277,170 @@
 
   <!-- Wildlife SVG — animals at y=290 so they stand on the horizon -->
   <svg class="hero-wildlife-svg" viewBox="0 0 1600 520" preserveAspectRatio="xMidYEnd slice" aria-hidden="true">
-    <!-- Giraffe -->
-    <g class="svg-giraffe" fill="#0A0E1F">
-      <g transform="translate(310, 290)">
-        <rect x="-22" y="-70" width="6" height="70"/>
-        <rect x="-8"  y="-70" width="6" height="70"/>
-        <rect x="22"  y="-70" width="6" height="70"/>
-        <rect x="36"  y="-70" width="6" height="70"/>
-        <rect x="-26" y="-86" width="72" height="20" rx="6"/>
-        <path d="M 32 -86 Q 40 -106 46 -126 L 56 -128 Q 50 -106 42 -82 Z"/>
-        <path d="M 46 -128 Q 64 -134 68 -138 L 70 -132 Q 62 -126 50 -122 Z"/>
-        <rect x="54" y="-142" width="2" height="8"/>
-        <rect x="58" y="-142" width="2" height="8"/>
+
+    <!-- Giraffe (walks right→left with gentle bob) -->
+    <g class="svg-giraffe-walk" fill="#0A0E1F">
+      <g class="svg-giraffe-bob">
+        <g transform="translate(0, 290)">
+          <!-- Legs: 4 long thin legs -->
+          <rect x="-22" y="-65" width="7" height="65" rx="2"/>
+          <rect x="-10" y="-62" width="7" height="62" rx="2"/>
+          <rect x="22"  y="-62" width="7" height="62" rx="2"/>
+          <rect x="34"  y="-65" width="7" height="65" rx="2"/>
+          <!-- Body: large oval torso -->
+          <ellipse cx="12" cy="-73" rx="40" ry="16"/>
+          <!-- Neck: long diagonal strip going upper-left -->
+          <path d="M -16,-70 L -44,-158 L -36,-160 L -8,-72 Z"/>
+          <!-- Head: small ellipse at top of neck, angled -->
+          <ellipse cx="-40" cy="-163" rx="18" ry="10" transform="rotate(-20,-40,-163)"/>
+          <!-- Ossicones (knobby horns on crown) -->
+          <path d="M -46,-170 L -44,-184 L -41,-184 L -39,-170 Z"/>
+          <path d="M -37,-169 L -35,-181 L -32,-181 L -30,-169 Z"/>
+          <!-- Lower jaw / chin bump -->
+          <path d="M -54,-158 Q -60,-162 -58,-155 Q -54,-151 -50,-156 Z"/>
+          <!-- Tail -->
+          <path d="M 40,-67 Q 50,-52 46,-38 L 44,-40 Q 46,-52 38,-65 Z"/>
+        </g>
       </g>
     </g>
-    <!-- Elephant -->
+
+    <!-- Elephant (walks right→left, facing left) -->
     <g class="svg-elephant" fill="#0A0E1F">
       <g transform="translate(0, 290)">
-        <ellipse cx="0" cy="-32" rx="62" ry="32"/>
-        <ellipse cx="-52" cy="-32" rx="28" ry="26"/>
-        <path d="M -64 -48 Q -82 -52 -86 -34 Q -78 -20 -62 -24 Z"/>
-        <path d="M -72 -20 Q -86 -4 -90 10 Q -86 14 -78 10 Q -70 -2 -62 -12 Z"/>
-        <rect x="-42" y="-10" width="14" height="10"/>
-        <rect x="-14" y="-6"  width="14" height="6"/>
-        <rect x="20"  y="-10" width="14" height="10"/>
-        <rect x="46"  y="-6"  width="14" height="6"/>
-        <path d="M 62 -34 Q 74 -30 76 -20 L 72 -18 Q 68 -26 60 -28 Z"/>
+        <!-- Body: large rounded form -->
+        <ellipse cx="5" cy="-46" rx="54" ry="35"/>
+        <!-- Head: rounded mass to the left -->
+        <ellipse cx="-54" cy="-52" rx="25" ry="22"/>
+        <!-- Ear: large curved flap -->
+        <path d="M -58,-42 Q -84,-30 -86,-56 Q -84,-82 -60,-70 Q -52,-55 -58,-42 Z"/>
+        <!-- Trunk: gentle S-curve hanging down -->
+        <path d="M -74,-40 Q -94,-16 -84,6 L -78,4 Q -86,-14 -68,-36 Z"/>
+        <!-- Tusk: small ivory diagonal -->
+        <path d="M -68,-50 L -85,-45 Q -83,-39 -68,-44 Z"/>
+        <!-- Front legs -->
+        <rect x="-46" y="-18" width="14" height="18" rx="4"/>
+        <rect x="-26" y="-18" width="14" height="18" rx="4"/>
+        <!-- Rear legs -->
+        <rect x="20" y="-18" width="14" height="18" rx="4"/>
+        <rect x="40" y="-18" width="14" height="18" rx="4"/>
+        <!-- Tail -->
+        <path d="M 58,-42 Q 66,-28 62,-14 L 60,-16 Q 62,-28 52,-40 Z"/>
       </g>
     </g>
-    <!-- Antelope herd -->
+
+    <!-- Antelope herd (runs left→right, facing right) -->
     <g class="svg-antelopes" fill="#0A0E1F">
+      <!-- Each antelope: body, head, lyre horns, 4 legs, neck -->
       <g transform="translate(0, 290)">
-        <ellipse cx="50" cy="-26" rx="20" ry="7"/><path d="M 66 -26 Q 72 -36 76 -40 L 80 -38 Q 76 -32 70 -24 Z"/><path d="M 76 -40 Q 78 -46 80 -48 M 78 -40 Q 82 -44 84 -46" stroke="#0A0E1F" stroke-width="1.2" fill="none"/><path d="M 38 -20 L 34 -2 M 42 -20 L 44 -2" stroke="#0A0E1F" stroke-width="2.5"/><path d="M 58 -20 L 54 -2 M 62 -20 L 66 -2" stroke="#0A0E1F" stroke-width="2.5"/><path d="M 32 -28 L 26 -28 L 32 -24 Z"/>
+        <ellipse cx="0" cy="-24" rx="22" ry="10"/>
+        <ellipse cx="24" cy="-28" rx="10" ry="8"/>
+        <path d="M 20,-35 Q 14,-52 16,-58 L 20,-56 Q 18,-50 26,-35 Z"/>
+        <path d="M 12,-22 Q 18,-32 24,-26 Q 14,-20 8,-18 Z"/>
+        <rect x="-16" y="-16" width="4" height="16" rx="1"/>
+        <rect x="-8"  y="-16" width="4" height="16" rx="1"/>
+        <rect x="4"   y="-16" width="4" height="16" rx="1"/>
+        <rect x="12"  y="-16" width="4" height="16" rx="1"/>
       </g>
-      <g transform="translate(90, 290)">
-        <ellipse cx="50" cy="-26" rx="20" ry="7"/><path d="M 66 -26 Q 72 -36 76 -40 L 80 -38 Q 76 -32 70 -24 Z"/><path d="M 38 -20 L 34 -2 M 42 -20 L 44 -2" stroke="#0A0E1F" stroke-width="2.5"/><path d="M 58 -20 L 54 -2 M 62 -20 L 66 -2" stroke="#0A0E1F" stroke-width="2.5"/><path d="M 32 -28 L 26 -28 L 32 -24 Z"/>
+      <g transform="translate(80, 290)">
+        <ellipse cx="0" cy="-24" rx="22" ry="10"/>
+        <ellipse cx="24" cy="-28" rx="10" ry="8"/>
+        <path d="M 20,-35 Q 14,-52 16,-58 L 20,-56 Q 18,-50 26,-35 Z"/>
+        <path d="M 12,-22 Q 18,-32 24,-26 Q 14,-20 8,-18 Z"/>
+        <rect x="-16" y="-16" width="4" height="16" rx="1"/>
+        <rect x="-8"  y="-16" width="4" height="16" rx="1"/>
+        <rect x="4"   y="-16" width="4" height="16" rx="1"/>
+        <rect x="12"  y="-16" width="4" height="16" rx="1"/>
       </g>
-      <g transform="translate(165, 290)">
-        <ellipse cx="50" cy="-26" rx="20" ry="7"/><path d="M 66 -26 Q 72 -36 76 -40 L 80 -38 Q 76 -32 70 -24 Z"/><path d="M 38 -20 L 34 -2 M 42 -20 L 44 -2" stroke="#0A0E1F" stroke-width="2.5"/><path d="M 58 -20 L 54 -2 M 62 -20 L 66 -2" stroke="#0A0E1F" stroke-width="2.5"/><path d="M 32 -28 L 26 -28 L 32 -24 Z"/>
+      <g transform="translate(155, 290)">
+        <ellipse cx="0" cy="-24" rx="22" ry="10"/>
+        <ellipse cx="24" cy="-28" rx="10" ry="8"/>
+        <path d="M 20,-35 Q 14,-52 16,-58 L 20,-56 Q 18,-50 26,-35 Z"/>
+        <path d="M 12,-22 Q 18,-32 24,-26 Q 14,-20 8,-18 Z"/>
+        <rect x="-16" y="-16" width="4" height="16" rx="1"/>
+        <rect x="-8"  y="-16" width="4" height="16" rx="1"/>
+        <rect x="4"   y="-16" width="4" height="16" rx="1"/>
+        <rect x="12"  y="-16" width="4" height="16" rx="1"/>
       </g>
       <g transform="translate(230, 290)">
-        <ellipse cx="50" cy="-26" rx="20" ry="7"/><path d="M 66 -26 Q 72 -36 76 -40 L 80 -38 Q 76 -32 70 -24 Z"/><path d="M 38 -20 L 34 -2 M 42 -20 L 44 -2" stroke="#0A0E1F" stroke-width="2.5"/><path d="M 58 -20 L 54 -2 M 62 -20 L 66 -2" stroke="#0A0E1F" stroke-width="2.5"/><path d="M 32 -28 L 26 -28 L 32 -24 Z"/>
+        <ellipse cx="0" cy="-24" rx="22" ry="10"/>
+        <ellipse cx="24" cy="-28" rx="10" ry="8"/>
+        <path d="M 20,-35 Q 14,-52 16,-58 L 20,-56 Q 18,-50 26,-35 Z"/>
+        <path d="M 12,-22 Q 18,-32 24,-26 Q 14,-20 8,-18 Z"/>
+        <rect x="-16" y="-16" width="4" height="16" rx="1"/>
+        <rect x="-8"  y="-16" width="4" height="16" rx="1"/>
+        <rect x="4"   y="-16" width="4" height="16" rx="1"/>
+        <rect x="12"  y="-16" width="4" height="16" rx="1"/>
       </g>
       <g transform="translate(310, 290)">
-        <ellipse cx="50" cy="-26" rx="20" ry="7"/><path d="M 66 -26 Q 72 -36 76 -40 L 80 -38 Q 76 -32 70 -24 Z"/><path d="M 38 -20 L 34 -2 M 42 -20 L 44 -2" stroke="#0A0E1F" stroke-width="2.5"/><path d="M 58 -20 L 54 -2 M 62 -20 L 66 -2" stroke="#0A0E1F" stroke-width="2.5"/><path d="M 32 -28 L 26 -28 L 32 -24 Z"/>
+        <ellipse cx="0" cy="-24" rx="22" ry="10"/>
+        <ellipse cx="24" cy="-28" rx="10" ry="8"/>
+        <path d="M 20,-35 Q 14,-52 16,-58 L 20,-56 Q 18,-50 26,-35 Z"/>
+        <path d="M 12,-22 Q 18,-32 24,-26 Q 14,-20 8,-18 Z"/>
+        <rect x="-16" y="-16" width="4" height="16" rx="1"/>
+        <rect x="-8"  y="-16" width="4" height="16" rx="1"/>
+        <rect x="4"   y="-16" width="4" height="16" rx="1"/>
+        <rect x="12"  y="-16" width="4" height="16" rx="1"/>
       </g>
     </g>
-    <!-- Distant zebras — positioned on mid-terrain layer -->
+
+    <!-- Distant zebras (drift right→left, facing left) — smaller, on mid layer -->
     <g class="svg-zebras" fill="#0A0E1F" opacity="0.7">
-      <g transform="translate(0, 268)"><ellipse cx="0" cy="-8" rx="6" ry="2.5"/><rect x="-5" y="-6" width="1.4" height="6"/><rect x="3.6" y="-6" width="1.4" height="6"/><ellipse cx="6" cy="-11" rx="2.5" ry="2"/></g>
-      <g transform="translate(24, 267)"><ellipse cx="0" cy="-8" rx="6" ry="2.5"/><rect x="-5" y="-6" width="1.4" height="6"/><rect x="3.6" y="-6" width="1.4" height="6"/><ellipse cx="6" cy="-11" rx="2.5" ry="2"/></g>
-      <g transform="translate(50, 268)"><ellipse cx="0" cy="-8" rx="6" ry="2.5"/><rect x="-5" y="-6" width="1.4" height="6"/><rect x="3.6" y="-6" width="1.4" height="6"/><ellipse cx="6" cy="-11" rx="2.5" ry="2"/></g>
-      <g transform="translate(74, 267)"><ellipse cx="0" cy="-8" rx="6" ry="2.5"/><rect x="-5" y="-6" width="1.4" height="6"/><rect x="3.6" y="-6" width="1.4" height="6"/><ellipse cx="6" cy="-11" rx="2.5" ry="2"/></g>
-      <g transform="translate(98, 268)"><ellipse cx="0" cy="-8" rx="6" ry="2.5"/><rect x="-5" y="-6" width="1.4" height="6"/><rect x="3.6" y="-6" width="1.4" height="6"/><ellipse cx="6" cy="-11" rx="2.5" ry="2"/></g>
-      <g transform="translate(124, 267)"><ellipse cx="0" cy="-8" rx="6" ry="2.5"/><rect x="-5" y="-6" width="1.4" height="6"/><rect x="3.6" y="-6" width="1.4" height="6"/><ellipse cx="6" cy="-11" rx="2.5" ry="2"/></g>
-      <g transform="translate(148, 268)"><ellipse cx="0" cy="-8" rx="6" ry="2.5"/><rect x="-5" y="-6" width="1.4" height="6"/><rect x="3.6" y="-6" width="1.4" height="6"/><ellipse cx="6" cy="-11" rx="2.5" ry="2"/></g>
+      <g transform="translate(0, 268)">
+        <ellipse cx="0" cy="-11" rx="13" ry="6"/>
+        <ellipse cx="-14" cy="-13" rx="7" ry="5.5"/>
+        <path d="M -10,-17 Q -8,-22 -6,-17 Z"/>
+        <rect x="-10" y="-6" width="3" height="6"/><rect x="-5" y="-6" width="3" height="6"/>
+        <rect x="2"   y="-6" width="3" height="6"/><rect x="7"  y="-6" width="3" height="6"/>
+        <path d="M 13,-8 Q 18,-3 16,2 L 14,1 Q 15,-3 11,-7 Z"/>
+      </g>
+      <g transform="translate(32, 267)">
+        <ellipse cx="0" cy="-11" rx="13" ry="6"/>
+        <ellipse cx="-14" cy="-13" rx="7" ry="5.5"/>
+        <path d="M -10,-17 Q -8,-22 -6,-17 Z"/>
+        <rect x="-10" y="-6" width="3" height="6"/><rect x="-5" y="-6" width="3" height="6"/>
+        <rect x="2"   y="-6" width="3" height="6"/><rect x="7"  y="-6" width="3" height="6"/>
+        <path d="M 13,-8 Q 18,-3 16,2 L 14,1 Q 15,-3 11,-7 Z"/>
+      </g>
+      <g transform="translate(64, 268)">
+        <ellipse cx="0" cy="-11" rx="13" ry="6"/>
+        <ellipse cx="-14" cy="-13" rx="7" ry="5.5"/>
+        <path d="M -10,-17 Q -8,-22 -6,-17 Z"/>
+        <rect x="-10" y="-6" width="3" height="6"/><rect x="-5" y="-6" width="3" height="6"/>
+        <rect x="2"   y="-6" width="3" height="6"/><rect x="7"  y="-6" width="3" height="6"/>
+        <path d="M 13,-8 Q 18,-3 16,2 L 14,1 Q 15,-3 11,-7 Z"/>
+      </g>
+      <g transform="translate(94, 267)">
+        <ellipse cx="0" cy="-11" rx="13" ry="6"/>
+        <ellipse cx="-14" cy="-13" rx="7" ry="5.5"/>
+        <path d="M -10,-17 Q -8,-22 -6,-17 Z"/>
+        <rect x="-10" y="-6" width="3" height="6"/><rect x="-5" y="-6" width="3" height="6"/>
+        <rect x="2"   y="-6" width="3" height="6"/><rect x="7"  y="-6" width="3" height="6"/>
+        <path d="M 13,-8 Q 18,-3 16,2 L 14,1 Q 15,-3 11,-7 Z"/>
+      </g>
+      <g transform="translate(124, 268)">
+        <ellipse cx="0" cy="-11" rx="13" ry="6"/>
+        <ellipse cx="-14" cy="-13" rx="7" ry="5.5"/>
+        <path d="M -10,-17 Q -8,-22 -6,-17 Z"/>
+        <rect x="-10" y="-6" width="3" height="6"/><rect x="-5" y="-6" width="3" height="6"/>
+        <rect x="2"   y="-6" width="3" height="6"/><rect x="7"  y="-6" width="3" height="6"/>
+        <path d="M 13,-8 Q 18,-3 16,2 L 14,1 Q 15,-3 11,-7 Z"/>
+      </g>
+      <g transform="translate(154, 267)">
+        <ellipse cx="0" cy="-11" rx="13" ry="6"/>
+        <ellipse cx="-14" cy="-13" rx="7" ry="5.5"/>
+        <path d="M -10,-17 Q -8,-22 -6,-17 Z"/>
+        <rect x="-10" y="-6" width="3" height="6"/><rect x="-5" y="-6" width="3" height="6"/>
+        <rect x="2"   y="-6" width="3" height="6"/><rect x="7"  y="-6" width="3" height="6"/>
+        <path d="M 13,-8 Q 18,-3 16,2 L 14,1 Q 15,-3 11,-7 Z"/>
+      </g>
+      <g transform="translate(184, 268)">
+        <ellipse cx="0" cy="-11" rx="13" ry="6"/>
+        <ellipse cx="-14" cy="-13" rx="7" ry="5.5"/>
+        <path d="M -10,-17 Q -8,-22 -6,-17 Z"/>
+        <rect x="-10" y="-6" width="3" height="6"/><rect x="-5" y="-6" width="3" height="6"/>
+        <rect x="2"   y="-6" width="3" height="6"/><rect x="7"  y="-6" width="3" height="6"/>
+        <path d="M 13,-8 Q 18,-3 16,2 L 14,1 Q 15,-3 11,-7 Z"/>
+      </g>
     </g>
   </svg>
 
